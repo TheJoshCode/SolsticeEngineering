@@ -869,9 +869,146 @@
             .contact-form { padding: 2rem 1.5rem; }
             .about-pillars { grid-template-columns: 1fr; }
         }
+
+        /* ─── SCROLL TIMELINE ───────────────────────────────── */
+        .scroll-timeline {
+            position: fixed;
+            right: 28px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            pointer-events: none;
+            width: auto;
+        }
+
+        .scroll-timeline-track {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 3px;
+            width: 1px;
+            background: rgba(201,185,144,0.12);
+        }
+
+        .scroll-timeline-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--gold);
+            height: 0%;
+            transition: height 0.15s ease;
+        }
+
+        .scroll-timeline-items {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0;
+        }
+
+        .stl-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            pointer-events: all;
+            padding: 14px 0;
+            position: relative;
+            flex-direction: row;
+        }
+
+        .stl-label {
+            font-family: var(--font-label);
+            font-size: 0.65rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--muted);
+            white-space: nowrap;
+            transition: color 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            transform: translateX(6px);
+            transition: color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+            text-align: right;
+        }
+
+        .stl-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(201,185,144,0.35);
+            background: transparent;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hover — show label */
+        .scroll-timeline:hover .stl-label {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Active section */
+        .stl-item.active .stl-dot {
+            background: var(--gold);
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(201,185,144,0.5);
+            transform: scale(1.3);
+        }
+
+        .stl-item.active .stl-label {
+            color: var(--gold);
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Past sections */
+        .stl-item.past .stl-dot {
+            background: rgba(201,185,144,0.4);
+            border-color: rgba(201,185,144,0.4);
+        }
+
+        .stl-item.past .stl-label {
+            color: var(--mid);
+        }
+
+        @media (max-width: 720px) {
+            .scroll-timeline { display: none; }
+        }
     </style>
 </head>
 <body>
+
+    <!-- SCROLL TIMELINE -->
+    <div class="scroll-timeline" id="scrollTimeline" aria-label="Page sections">
+        <div class="scroll-timeline-track">
+            <div class="scroll-timeline-fill" id="timelineFill"></div>
+        </div>
+        <div class="scroll-timeline-items">
+            <div class="stl-item active" data-target="#home">
+                <span class="stl-label">Home</span>
+                <div class="stl-dot"></div>
+            </div>
+            <div class="stl-item" data-target="#why-us">
+                <span class="stl-label">Why Us</span>
+                <div class="stl-dot"></div>
+            </div>
+            <div class="stl-item" data-target="#services">
+                <span class="stl-label">Services</span>
+                <div class="stl-dot"></div>
+            </div>
+            <div class="stl-item" data-target="#contact">
+                <span class="stl-label">Contact</span>
+                <div class="stl-dot"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- NAV -->
     <nav>
@@ -1174,6 +1311,49 @@
                 if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
             });
         });
+
+        // ─── SCROLL TIMELINE ────────────────────────────────────
+        (function() {
+            const sections = ['#home', '#why-us', '#services', '#contact'];
+            const items = document.querySelectorAll('.stl-item');
+            const fill = document.getElementById('timelineFill');
+
+            // Click to scroll
+            items.forEach(item => {
+                item.addEventListener('click', () => {
+                    const target = document.querySelector(item.dataset.target);
+                    if (target) target.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            function updateTimeline() {
+                const scrollY = window.scrollY;
+                const docH = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPct = Math.min(100, (scrollY / docH) * 100);
+
+                // Update the fill bar
+                fill.style.height = scrollPct + '%';
+
+                // Find which section is active (the one most visible in viewport)
+                const midY = scrollY + window.innerHeight * 0.45;
+                let activeIdx = 0;
+
+                sections.forEach((sel, i) => {
+                    const el = document.querySelector(sel);
+                    if (!el) return;
+                    if (el.offsetTop <= midY) activeIdx = i;
+                });
+
+                items.forEach((item, i) => {
+                    item.classList.remove('active', 'past');
+                    if (i === activeIdx) item.classList.add('active');
+                    else if (i < activeIdx) item.classList.add('past');
+                });
+            }
+
+            window.addEventListener('scroll', updateTimeline, { passive: true });
+            updateTimeline();
+        })();
     </script>
 </body>
 </html>
