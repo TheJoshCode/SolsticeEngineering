@@ -573,8 +573,16 @@
         }
 
         .contact-inner {
-            max-width: 860px;
+            max-width: 1000px;
             margin: 0 auto;
+        }
+
+        .calendly-wrap {
+            background: var(--bg-card);
+            border: 1px solid var(--gold-border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-top: 3rem;
         }
 
         .contact-form {
@@ -773,7 +781,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact">Schedule</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
                 <span></span><span></span><span></span>
@@ -791,7 +799,7 @@
             high-performance operations — from concept through commissioning.
         </p>
         <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary">Request a Quote</a>
+            <a href="#contact" class="btn btn-primary">Schedule a Meeting</a>
             <a href="#services" class="btn btn-outline">Our Services</a>
         </div>
     </section>
@@ -899,7 +907,7 @@
                     <div class="pillar"><div class="pillar-dot"></div><span>Quality Guaranteed</span></div>
                     <div class="pillar"><div class="pillar-dot"></div><span>Competitive Pricing</span></div>
                 </div>
-                <a href="#contact" class="btn btn-primary" style="margin-top: 2.5rem; display: inline-block; align-self: center;">Work With Us</a>
+                <a href="#contact" class="btn btn-primary" style="margin-top: 2.5rem; display: inline-block; align-self: center;">Schedule a Meeting</a>
             </div>
         </div>
     </section>
@@ -908,44 +916,17 @@
     <section class="contact" id="contact">
         <div class="contact-inner">
             <div class="section-header reveal">
-                <span class="eyebrow">Get In Touch</span>
-                <h2 class="section-title">Start Your <em>Project</em></h2>
-                <p class="section-sub">Ready to optimize your operations? Contact us for a free consultation and quote.</p>
+                <span class="eyebrow">Schedule a Meeting</span>
+                <h2 class="section-title">Let's Talk About Your <em>Project</em></h2>
+                <p class="section-sub">Pick a time that works for you — we'll discuss your goals, challenges, and how Solstice Engineering can help.</p>
             </div>
 
-            <form class="contact-form reveal" onsubmit="handleSubmit(event)">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" placeholder="John Smith" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" placeholder="john@company.com" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000">
-                    </div>
-                    <div class="form-group">
-                        <label for="company">Company Name</label>
-                        <input type="text" id="company" name="company" placeholder="Acme Industries">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="service">Service Interested In</label>
-                    <input type="text" id="service" name="service" placeholder="e.g. Automation Systems, Conveyance Installation…">
-                </div>
-                <div class="form-group">
-                    <label for="message">Project Details</label>
-                    <textarea id="message" name="message" placeholder="Tell us about your project requirements, timeline, and goals…" required></textarea>
-                </div>
-                <div class="form-submit">
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </div>
-            </form>
+            <div class="calendly-wrap reveal">
+                <!-- Calendly inline widget begin -->
+                <div class="calendly-inline-widget" data-url="https://calendly.com/josh-roberts-solsticeengineering/30min?hide_gdpr_banner=1&background_color=0f0f0f&text_color=f0ece4&primary_color=C9B990" style="min-width:320px;height:700px;"></div>
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                <!-- Calendly inline widget end -->
+            </div>
         </div>
     </section>
 
@@ -975,7 +956,7 @@
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#">Projects</a></li>
                         <li><a href="#">Careers</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#contact">Schedule a Meeting</a></li>
                     </ul>
                 </div>
                 <div>
