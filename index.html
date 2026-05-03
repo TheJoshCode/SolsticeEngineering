@@ -565,6 +565,111 @@
             color: var(--mid);
         }
 
+        /* ─── WHY US ─────────────────────────────────────── */
+        .why-us {
+            position: relative;
+            z-index: 1;
+            padding: var(--section-pad);
+            background: linear-gradient(180deg, transparent, rgba(201,185,144,0.02), transparent);
+        }
+
+        .why-us-inner {
+            max-width: var(--max-w);
+            margin: 0 auto;
+        }
+
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5px;
+            background: var(--gold-border);
+            border: 1px solid var(--gold-border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-top: 3rem;
+        }
+
+        .why-card {
+            background: var(--bg-card);
+            padding: 3.5rem 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: background 0.3s ease;
+        }
+
+        .why-card:hover { background: var(--bg-raised); }
+
+        .why-card-accent {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 1.25rem;
+        }
+
+        .why-card-title {
+            font-family: var(--font-label);
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .why-card p {
+            color: var(--muted);
+            font-size: 0.98rem;
+            line-height: 1.85;
+        }
+
+        .why-card p strong {
+            color: var(--mid);
+            font-weight: 500;
+        }
+
+        .why-callout {
+            margin-top: 1.5px;
+            background: var(--bg-card);
+            border-top: none;
+            padding: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+            transition: background 0.3s ease;
+        }
+
+        .why-callout:hover { background: var(--bg-raised); }
+        
+        .why-callout-text {
+        font-family: var(--font-display);
+        font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+        font-weight: 500;
+        color: var(--text);
+        line-height: 1.4;
+        max-width: 680px;
+        text-align: center;
+        /* Added to center the block itself */
+        margin-left: auto;
+        margin-right: auto;
+        }
+
+        .why-callout-text em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        @media (max-width: 1024px) {
+            .why-us-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 720px) {
+            .why-callout { flex-direction: column; align-items: flex-start; }
+        }
+
         /* ─── CONTACT ───────────────────────────────────────── */
         .contact {
             position: relative;
@@ -780,6 +885,7 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
+                <li><a href="#why-us">Why Us</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Schedule</a></li>
             </ul>
@@ -818,6 +924,24 @@
             <div class="stat">
                 <div class="stat-num" data-target="24">0</div>
                 <div class="stat-label">Hour Support</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY US -->
+    <section class="why-us" id="why-us">
+        <div class="why-us-inner">
+            <div class="section-header reveal">
+                <span class="eyebrow">Why Solstice</span>
+                <h2 class="section-title">WHY<em> US</em></h2>
+            </div>
+
+            <div class="why-us-grid" style="margin-top: 1.5px; border-top: none; border-radius: 0 0 var(--radius) var(--radius);">
+                <div class="why-callout reveal" style="grid-column: 1 / -1; margin-top: 0;">
+                    <p class="why-callout-text">
+                        Most large automation and installation companies require a 10 machine purchase minimum, making regular reliable service out-of-reach for most startup to mid-size manufacturers. We have NO MACHINE MINIMUM FOR OUR SERVICES.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
